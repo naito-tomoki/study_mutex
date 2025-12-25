@@ -1,7 +1,7 @@
 NAME				=	mutex
 
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall
 
 LIBS				=	-lpthread
 
@@ -13,17 +13,17 @@ SRC_DIR_LIST		=	$(shell find $(DIR_SRC))
 INC_DIR_LIST		=	$(shell find $(DIR_INC))
 
 SRCS				=	$(foreach srcdir,$(SRC_DIR_LIST),$(wildcard $(srcdir)/*.c))
-INCS				=	$(foreach incdir,$(INC_DIR_LIST),$(wildcard $(incdir)/*.h))
+INCS				=	$(foreach incdir,$(INC_DIR_LIST),-I $(incdir))
 OBJS				=	$(SRCS:$(DIR_SRC)/%.c=$(DIR_OBJ)/%.o)
 
 .DEFAULT_GOAL		=	all
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBS)
+	$(CC) $(CFLAGS) $^ -o $@ $(INCS) $(LIBS)
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
 
 all: $(NAME)
 
