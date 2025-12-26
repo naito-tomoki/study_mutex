@@ -58,7 +58,8 @@ print_error(const char *msg, ...)
  * @return is compare 2 variables are same value
  */
 bool
-is_same(void *compare1, void *compare2, uintptr_t size)
+is_same(const void *compare1, const void *compare2,
+			const uintptr_t size)
 {
 # define STANDARD_SIZE sizeof(unsigned char)
 	int 			i;
@@ -66,8 +67,8 @@ is_same(void *compare1, void *compare2, uintptr_t size)
 	unsigned char	*unsiged_compare1_pointer;
 	unsigned char	*unsiged_compare2_pointer;
 
-	unsiged_compare1_pointer = compare1;
-	unsiged_compare2_pointer = compare2;
+	unsiged_compare1_pointer = (unsigned char *)compare1;
+	unsiged_compare2_pointer = (unsigned char *)compare2;
 	compare_times = (size / STANDARD_SIZE);
 	for (i = 0; i < compare_times; i++)
 	{
@@ -88,13 +89,15 @@ is_same(void *compare1, void *compare2, uintptr_t size)
  * @return the element number where target is in array
  */
 int
-find_index(void *array, void *target,
-				int length, uintptr_t size)
+find_index(const void *array, const void *target,
+				const int length, const uintptr_t size)
 {
 	int	i;
 
 	for (i = 0; i < length; i++)
 	{
+		if (is_same(array + (size * i), target, size))
+			return i;
 	}
 	return -1;
 }

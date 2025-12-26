@@ -9,9 +9,10 @@ main(void)
 
 	if (!share_init(&share)) return 1;
 
-	int	value1 = 0xFFF;
-	int	value2 = 0xFFF + 0;
-
-	printf("is_same: %d\n", is_same(&value1, &value2, sizeof(int)));
+	int	array[] = {1, 2, 3, 4, 5, 10, 100};
+	int	target = 10;
+	int	res = find_index(array, &target,
+		sizeof(array) / sizeof(array[0]), sizeof(int));
+	printf("index: %d\n", res);
 	return 0;
 }

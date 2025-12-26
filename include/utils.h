@@ -21,6 +21,20 @@ print_error(const char *msg, ...);
  * @return is compare 2 variables are same value
  */
 bool
-is_same(void *compare1, void *compare2, uintptr_t size);
+is_same(const void *compare1, const void *compare2,
+			const uintptr_t size);
+
+/**
+ * @fn
+ * find target from array
+ * @param array array to search for
+ * @param target what to look for
+ * @param length number of elements in the array
+ * @param size the size of the target data type
+ * @return the element number where target is in array
+ */
+int
+find_index(const void *array, const void *target,
+				const int length, const uintptr_t size);
 
 #endif
