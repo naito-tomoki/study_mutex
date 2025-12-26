@@ -62,12 +62,14 @@ is_same(void *compare1, void *compare2, uintptr_t size)
 {
 # define STANDARD_SIZE sizeof(unsigned char)
 	int 			i;
+	int				compare_times;
 	unsigned char	*unsiged_compare1_pointer;
 	unsigned char	*unsiged_compare2_pointer;
 
 	unsiged_compare1_pointer = compare1;
 	unsiged_compare2_pointer = compare2;
-	for (i = 0; i < size; i++)
+	compare_times = (size / STANDARD_SIZE);
+	for (i = 0; i < compare_times; i++)
 	{
 		if (*(unsiged_compare1_pointer + i)
 			!= *(unsiged_compare2_pointer + i))
