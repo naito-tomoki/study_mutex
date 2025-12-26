@@ -9,6 +9,9 @@ main(void)
 
 	if (!share_init(&share)) return 1;
 
-	print_error("nothing to done %s", "...");
+	int	value1 = 0xFFF;
+	int	value2 = 0xFFF + 1;
+
+	printf("is_same: %d\n", is_same(&value1, &value2, sizeof(int)));
 	return 0;
 }

@@ -30,3 +30,31 @@ share_init(t_share *share)
 	share->array_index = 0;
 	return true;
 }
+
+bool
+mutex_lock(t_share *share)
+{
+	if (!share) return false;
+
+	pthread_mutex_t *mutex =
+						&(share->mutex);
+
+	const int	error =
+		pthread_mutex_lock(mutex);
+	switch (error)
+	{
+		case EINVAL:
+		case EDEADLK:
+			return false;
+		default:
+			;
+	}
+	return true;
+}
+
+bool
+mutex_unlock(t_share *share)
+{
+	if (!share) return false;
+	return true;
+}
