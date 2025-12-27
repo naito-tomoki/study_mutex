@@ -3,4 +3,4 @@ mutex
 
 # build
 build
-.o
+*.o
