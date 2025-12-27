@@ -72,3 +72,33 @@ mutex_unlock(t_share *share)
 	}
 	return true;
 }
+
+bool
+share_thread(pthread_t *thread,
+	void *(routine_function)(void *), void *arg)
+{
+	const int	error =
+		pthread_create(thread, NULL, routine_function, arg);
+	switch (error)
+	{
+		case EAGAIN:
+		case EINVAL:
+		case EPERM:
+			return false;
+		default:
+			;
+	}
+	return true;
+}
+
+bool
+share_input_value(t_share *share, int value)
+{
+	if (!share) return false;
+
+	if (!mutex_lock(share)) return false;
+	(share->array_numbers)[share->array_index] = value;
+	(share->array_index)++;
+	if (!mutex_unlock(share)) return false;
+	return true;
+}

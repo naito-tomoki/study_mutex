@@ -29,4 +29,8 @@ mutex_lock(t_share *share);
 bool
 mutex_unlock(t_share *share);
 
+/* input value */
+bool
+share_input_value(t_share *share, int value);
+
 #endif
