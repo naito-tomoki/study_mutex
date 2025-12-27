@@ -15,10 +15,18 @@ typedef struct s_share
 	int				array_index;
 }	t_share;
 
+/* init functions */
 bool
 mutex_init(pthread_mutex_t *mutex);
 
 bool
 share_init(t_share *share);
+
+/* mutex functions */
+bool
+mutex_lock(t_share *share);
+
+bool
+mutex_unlock(t_share *share);
 
 #endif

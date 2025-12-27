@@ -56,5 +56,19 @@ bool
 mutex_unlock(t_share *share)
 {
 	if (!share) return false;
+
+	pthread_mutex_t	*mutex =
+						&(share->mutex);
+
+	const int	error =
+		pthread_mutex_lock(mutex);
+	switch (error)
+	{
+		case EINVAL:
+		case EPERM:
+			return false;
+		default:
+			;
+	}
 	return true;
 }
