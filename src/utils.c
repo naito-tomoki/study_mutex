@@ -51,36 +51,6 @@ print_error(const char *msg, ...)
 
 /**
  * @fn
- * compare 2 variables value to check same value
- * @param compare1 one of the compare variable
- * @param compare2 compare with compare1 variable
- * @param size the size of the 2 variables data type
- * @return is compare 2 variables are same value
- */
-bool
-is_same(const void *compare1, const void *compare2,
-			const uintptr_t size)
-{
-# define STANDARD_SIZE sizeof(unsigned char)
-	int 			i;
-	int				compare_times;
-	unsigned char	*unsiged_compare1_pointer;
-	unsigned char	*unsiged_compare2_pointer;
-
-	unsiged_compare1_pointer = (unsigned char *)compare1;
-	unsiged_compare2_pointer = (unsigned char *)compare2;
-	compare_times = (size / STANDARD_SIZE);
-	for (i = 0; i < compare_times; i++)
-	{
-		if (*(unsiged_compare1_pointer + i)
-			!= *(unsiged_compare2_pointer + i))
-			return false;
-	}
-	return true;
-}
-
-/**
- * @fn
  * find target from array
  * @param array array to search for
  * @param target what to look for
@@ -92,11 +62,15 @@ int
 find_index(const void *array, const void *target,
 				const int length, const uintptr_t size)
 {
-	int	i;
+	int							i;
+	const unsigned char			*unsigned_array;
+	const unsigned char			*unsigned_target;
 
+	unsigned_array = (const unsigned char *)array;
+	unsigned_target = (const unsigned char *)target;
 	for (i = 0; i < length; i++)
 	{
-		if (is_same(array + (size * i), target, size))
+		if (memcmp(unsigned_array + (i * size), unsigned_target, size) == 0)
 			return i;
 	}
 	return -1;

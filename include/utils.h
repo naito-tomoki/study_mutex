@@ -14,18 +14,6 @@ print_error(const char *msg, ...);
 
 /**
  * @fn
- * compare 2 variables value to check same value
- * @param compare1 one of the compare variable
- * @param compare2 compare with compare1 variable
- * @param size the size of the 2 variables data type
- * @return is compare 2 variables are same value
- */
-bool
-is_same(const void *compare1, const void *compare2,
-			const uintptr_t size);
-
-/**
- * @fn
  * find target from array
  * @param array array to search for
  * @param target what to look for

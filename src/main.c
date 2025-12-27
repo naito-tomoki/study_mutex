@@ -9,7 +9,7 @@ main(void)
 
 	if (!share_init(&share)) return 1;
 
-	int	array[] = {1, 2, 3, 4, 5, 10, 100};
+	int	array[] = {1, 5, 10, 100};
 	int	target = 10;
 	int	res = find_index(array, &target,
 		sizeof(array) / sizeof(array[0]), sizeof(int));
